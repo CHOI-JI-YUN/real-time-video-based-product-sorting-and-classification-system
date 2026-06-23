@@ -15,14 +15,11 @@ YOLO, OpenCV, WPF, MQTT, ESP32 AGV 기반 제품 자동 정렬 및 분류 기능
 
 ## 📌 프로젝트 소개
 
-본 프로젝트는 스마트팩토리 환경을 가정하여,
-실시간 카메라 영상을 분석해 제품을 자동으로 정렬하고 분류하는 시스템입니다.
+본 프로젝트는 스마트팩토리 환경을 가정하여, 실시간 카메라 영상을 분석해 제품을 자동으로 정렬하고 분류하는 시스템입니다.
 
-카메라에서 수집한 영상을 YOLO 및 OpenCV 기반으로 분석하여 제품 종류와 상태를 판별하고,
-분류 결과에 따라 트레이 적재 상태, 생산 현황, AGV 이송 상태를 WPF HMI에서 실시간으로 확인할 수 있도록 구현했습니다.
+카메라에서 수집한 영상을 YOLO 및 OpenCV 기반으로 분석하여 제품 종류와 상태를 판별하고, 분류 결과에 따라 트레이 적재 상태, 생산 현황, AGV 이송 상태를 WPF HMI에서 실시간으로 확인할 수 있도록 구현했습니다.
 
-또한 MQTT 기반 실시간 데이터 연동 구조를 적용하여 카메라 분석 결과, AGV 상태, 이벤트 로그를 화면에 반영했으며,
-SQLite 기반 데이터 저장 기능을 통해 검사 결과, 이벤트 로그, AGV 이력을 관리할 수 있도록 구성했습니다.
+또한 MQTT 기반 실시간 데이터 연동 구조를 적용하여 카메라 분석 결과, AGV 상태, 이벤트 로그를 화면에 반영했으며, SQLite 기반 데이터 저장 기능을 통해 검사 결과, 이벤트 로그, AGV 이력을 관리할 수 있도록 구성했습니다.
 
 ---
 
@@ -169,17 +166,6 @@ SQLite 기반 데이터 저장 기능을 통해 검사 결과, 이벤트 로그,
 
 ---
 
-## 🧠 설계 포인트
-
-* WPF MVVM 기반 HMI 화면 구조 설계
-* MQTT 기반 실시간 장비 상태 데이터 연동 구조 설계
-* 카메라 영상 분석 결과와 트레이 상태 데이터 연결 구조 설계
-* ESP32 AGV와 RFID 태그 기반 목적지 이동 흐름 구성
-* SQLite 기반 검사 결과 및 이벤트 로그 관리 구조 설계
-* 관리자 / 작업자 권한에 따른 화면 접근 구조 설계
-
----
-
 ## 🚀 프로젝트 특징
 
 * 영상 분석, HMI, AGV 제어, 데이터 저장 기능을 하나의 시스템으로 통합
@@ -196,23 +182,34 @@ SQLite 기반 데이터 저장 기능을 통해 검사 결과, 이벤트 로그,
 ```text
 real-time-video-based-product-sorting-and-classification-system/
 
+├── agv-firmware/               # ESP32 기반 AGV 제어 코드
+│   └── esp32_agv_firmware.ino  # 라인트레이싱, RFID, 초음파 센서 제어
+│
+├── docs/                       # 발표 자료
+│   └── final_project_presentation.pdf
+│
+├── images/                     # README 실행 화면 이미지
+│   ├── agv_status.gif
+│   ├── camera_monitoring.png
+│   ├── dashboard.png
+│   ├── defect_status.png
+│   ├── login.png
+│   └── user_management.png
+│
 ├── wpf-hmi/                    # WPF 기반 HMI 프로그램
 │   ├── Assets/                 # 이미지 및 UI 리소스
 │   ├── Data/                   # 데이터 관련 파일
 │   ├── Models/                 # 데이터 모델
 │   ├── Services/               # MQTT, REST, SQLite 연동
 │   ├── ViewModels/             # 화면별 데이터 처리
-│   ├── MainWindow.xaml         # 메인 대시보드 화면
-│   ├── LoginWindow.xaml        # 로그인 화면
-│   ├── AllCameraView.xaml      # 카메라 전체 보기 화면
-│   ├── SiteCameraWindow.xaml   # 현장 카메라 화면
 │   ├── AdminDataWindow.xaml    # 관리자 데이터 관리 화면
+│   ├── AllCameraView.xaml      # 카메라 전체 보기 화면
+│   ├── LoginWindow.xaml        # 로그인 화면
+│   ├── MainWindow.xaml         # 메인 대시보드 화면
+│   ├── SiteCameraWindow.xaml   # 현장 카메라 화면
 │   ├── UserManagementWindow.xaml
 │   ├── VisiPickHMI.csproj
 │   └── VisiPickHMI.sln
-│
-├── agv-firmware/               # ESP32 기반 AGV 제어 코드
-│   └── esp32_agv_firmware.ino  # 라인트레이싱, RFID, 초음파 센서 제어
 │
 ├── .gitignore
 └── README.md
@@ -227,17 +224,21 @@ real-time-video-based-product-sorting-and-classification-system/
 ---
 
 ## 📑 발표 자료
-- [발표자료 보기](docs/final_project_presentation.pdf)
+
+* [발표자료 보기](docs/final_project_presentation.pdf)
 
 ---
+
 ## 📷 실행 화면
 
 ### 🔐 로그인 화면
+
 ![로그인 화면](images/login.png)
 
 ---
 
 ### 🖥 통합 대시보드
+
 생산 현황, 검사 결과, 카메라 영상, AGV 상태, 이벤트 로그를 한 화면에서 확인할 수 있는 화면입니다.
 
 ![통합 대시보드](images/dashboard.png)
@@ -245,6 +246,7 @@ real-time-video-based-product-sorting-and-classification-system/
 ---
 
 ### 🎥 카메라 모니터링
+
 실시간 영상 분석 결과와 제품 분류 상태를 확인할 수 있는 화면입니다.
 
 ![카메라 모니터링](images/camera_monitoring.png)
@@ -252,6 +254,7 @@ real-time-video-based-product-sorting-and-classification-system/
 ---
 
 ### 📊 불량 현황
+
 제품별 불량 수량과 불량률을 시각적으로 확인할 수 있는 화면입니다.
 
 ![불량 현황](images/defect_status.png)
@@ -259,6 +262,7 @@ real-time-video-based-product-sorting-and-classification-system/
 ---
 
 ### 🚗 AGV 상태
+
 AGV의 이동 경로, 노드, 현재 상태를 실시간으로 확인할 수 있는 화면입니다.
 
 ![AGV 상태](images/agv_status.gif)
@@ -266,6 +270,7 @@ AGV의 이동 경로, 노드, 현재 상태를 실시간으로 확인할 수 있
 ---
 
 ### 👥 회원 관리
+
 관리자 권한으로 사용자 계정을 등록하고 권한 및 활성 상태를 관리하는 화면입니다.
 
 ![회원 관리](images/user_management.png)
