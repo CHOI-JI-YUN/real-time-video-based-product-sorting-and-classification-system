@@ -193,6 +193,7 @@ real-time-video-based-product-sorting-and-classification-system/
 │   ├── camera_monitoring.png
 │   ├── dashboard.png
 │   ├── defect_status.png
+│   ├── event_log.png
 │   ├── login.png
 │   └── user_management.png
 │
