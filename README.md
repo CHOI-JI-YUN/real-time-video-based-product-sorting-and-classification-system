@@ -216,7 +216,6 @@ real-time-video-based-product-sorting-and-classification-system/
 └── README.md
 ```
 
-
 ---
 
 ## 📑 발표 자료
