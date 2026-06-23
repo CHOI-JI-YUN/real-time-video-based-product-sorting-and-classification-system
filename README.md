@@ -1,12 +1,13 @@
 # 🏭 실시간 영상을 분석한 제품 자동 정렬 및 분류 시스템
 
-![Language](https://img.shields.io/badge/Language-C%23-blue)
+![Language](https://img.shields.io/badge/Language-C%23%20%7C%20C%2B%2B%20%7C%20Python-blue)
 ![Framework](https://img.shields.io/badge/Framework-WPF-5C2D91)
 ![Vision](https://img.shields.io/badge/Vision-YOLO%20%7C%20OpenCV-green)
 ![API](https://img.shields.io/badge/API-FastAPI-009688)
 ![Communication](https://img.shields.io/badge/Communication-MQTT-orange)
 ![Database](https://img.shields.io/badge/Database-SQLite-lightgrey)
 ![Hardware](https://img.shields.io/badge/Hardware-ESP32%20AGV-red)
+![IDE](https://img.shields.io/badge/IDE-Visual%20Studio%20%7C%20VS%20Code%20%7C%20Arduino%20IDE-purple)
 
 YOLO, OpenCV, WPF, MQTT, ESP32 AGV 기반 제품 자동 정렬 및 분류 기능을 통합한 스마트팩토리 자동화 시스템입니다.
 
