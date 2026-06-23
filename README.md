@@ -226,6 +226,10 @@ real-time-video-based-product-sorting-and-classification-system/
 
 ---
 
+## 📑 발표 자료
+- [발표자료 보기](docs/final_project_presentation.pdf)
+
+---
 ## 📷 실행 화면
 
 ### 🔐 로그인 화면
