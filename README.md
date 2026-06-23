@@ -216,11 +216,6 @@ real-time-video-based-product-sorting-and-classification-system/
 └── README.md
 ```
 
----
-
-## 🎥 시연 영상
-
-시연 영상은 추후 업로드 예정입니다.
 
 ---
 
