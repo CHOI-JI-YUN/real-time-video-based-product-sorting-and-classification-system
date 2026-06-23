@@ -228,40 +228,40 @@ real-time-video-based-product-sorting-and-classification-system/
 
 ## 📷 실행 화면
 
-### 🖥 통합 대시보드
+### 🔐 로그인 화면
+![로그인 화면](images/login.png)
 
+---
+
+### 🖥 통합 대시보드
 생산 현황, 검사 결과, 카메라 영상, AGV 상태, 이벤트 로그를 한 화면에서 확인할 수 있는 화면입니다.
 
 ![통합 대시보드](images/dashboard.png)
 
 ---
 
-### 🎥 카메라 모니터링 화면
-
+### 🎥 카메라 모니터링
 실시간 영상 분석 결과와 제품 분류 상태를 확인할 수 있는 화면입니다.
 
 ![카메라 모니터링](images/camera_monitoring.png)
 
 ---
 
-### 🚗 AGV 상태 화면
+### 📊 불량 현황
+제품별 불량 수량과 불량률을 시각적으로 확인할 수 있는 화면입니다.
 
-AGV의 이동 경로, 목적지, 현재 상태를 실시간으로 확인할 수 있는 화면입니다.
-
-![AGV 상태](images/agv_status.png)
-
----
-
-### 📊 생산 현황 화면
-
-제품별 생산 수량, 정상 수량, 불량 수량, 불량률을 시각적으로 확인할 수 있는 화면입니다.
-
-![생산 현황](images/production_status.png)
+![불량 현황](images/defect_status.png)
 
 ---
 
-### 🗄 관리자 데이터 관리 화면
+### 🚗 AGV 상태
+AGV의 이동 경로, 노드, 현재 상태를 실시간으로 확인할 수 있는 화면입니다.
 
-검사 결과, 이벤트 로그, AGV 기록을 조회하고 CSV 파일로 저장할 수 있는 화면입니다.
+![AGV 상태](images/agv_status.gif)
 
-![관리자 데이터 관리](images/data_management.png)
+---
+
+### 👥 회원 관리
+관리자 권한으로 사용자 계정을 등록하고 권한 및 활성 상태를 관리하는 화면입니다.
+
+![회원 관리](images/user_management.png)
