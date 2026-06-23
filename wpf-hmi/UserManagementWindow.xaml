@@ -1,0 +1,229 @@
+<mah:MetroWindow x:Class="VisiPickHMI.UserManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="회원 관리  |  VisiPick"
+        TitleCharacterCasing="Normal"
+        WindowTitleBrush="#0B1120"
+        GlowBrush="#3B82F6"
+        TitleBarHeight="32"
+        TitleForeground="#94A3B8"
+        Width="820" Height="560"
+        MinWidth="700" MinHeight="440"
+        WindowStartupLocation="CenterOwner"
+        Background="#0B1120">
+
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="16"/>
+            <ColumnDefinition Width="260"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ══ 좌: 회원 목록 ══ -->
+        <Border Grid.Column="0" Background="#151F35" BorderBrush="#1E2D4A"
+                BorderThickness="1" CornerRadius="8" Padding="12">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="👥 회원 목록" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#94A3B8" Margin="0,0,0,10"/>
+
+                <DataGrid Grid.Row="1" x:Name="UserGrid"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          HeadersVisibility="Column" GridLinesVisibility="None"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
+                          SelectionMode="Single" Background="Transparent"
+                          BorderThickness="0" RowBackground="Transparent" RowHeaderWidth="0"
+                          AlternatingRowBackground="#0D1525"
+                          Foreground="#E2E8F0" FontSize="12" RowHeight="30"
+                          SelectionChanged="UserGrid_SelectionChanged"
+                          PreviewMouseLeftButtonDown="UserGrid_PreviewMouseLeftButtonDown"
+                          CellEditEnding="UserGrid_CellEditEnding">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#111B2E"/>
+                            <Setter Property="Foreground" Value="#94A3B8"/>
+                            <Setter Property="FontSize" Value="11"/>
+                            <Setter Property="Padding" Value="8,4"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="BorderBrush" Value="#1E2D4A"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#1A2744"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="8,2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridCell">
+                                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="아이디" Binding="{Binding Username}" Width="110">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="이름" Binding="{Binding DisplayName}" Width="90">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="권한" Binding="{Binding Role}" Width="80">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="가입일" Binding="{Binding CreatedAt}" Width="*" MinWidth="145">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="활성" Width="45">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Click="ActiveCheckBox_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button x:Name="BtnDelete" Content="🗑 삭제" Width="70" Height="30" FontSize="11"
+                            Foreground="#EF5350" Background="#2C1010" BorderThickness="0"
+                            Cursor="Hand" Click="DeleteUser_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="8,4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ══ 우: 추가/수정 폼 ══ -->
+        <Border Grid.Column="2" Background="#151F35" BorderBrush="#1E2D4A"
+                BorderThickness="1" CornerRadius="8" Padding="16">
+            <StackPanel>
+                <TextBlock x:Name="FormTitle" Text="➕ 새 회원 추가" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#94A3B8" Margin="0,0,0,16"/>
+
+                <TextBlock Text="아이디" FontSize="11" Foreground="#94A3B8" Margin="0,0,0,4"/>
+                <Border Background="#0B1120" BorderBrush="#1E2D4A" BorderThickness="1" CornerRadius="6" Margin="0,0,0,10">
+                    <TextBox x:Name="TxtId" Background="Transparent" BorderThickness="0"
+                             Foreground="#E2E8F0" FontSize="12" Padding="8,6" CaretBrush="#E2E8F0"
+                             CommandManager.PreviewExecuted="BlockCopyPaste"/>
+                </Border>
+
+                <TextBlock Text="이름" FontSize="11" Foreground="#94A3B8" Margin="0,0,0,4"/>
+                <Border Background="#0B1120" BorderBrush="#1E2D4A" BorderThickness="1" CornerRadius="6" Margin="0,0,0,10">
+                    <TextBox x:Name="TxtDisplayName" Background="Transparent" BorderThickness="0"
+                             Foreground="#E2E8F0" FontSize="12" Padding="8,6" CaretBrush="#E2E8F0"
+                             CommandManager.PreviewExecuted="BlockCopyPaste"/>
+                </Border>
+
+                <TextBlock Text="비밀번호" FontSize="11" Foreground="#94A3B8" Margin="0,0,0,4"/>
+                <Border Background="#0B1120" BorderBrush="#1E2D4A" BorderThickness="1" CornerRadius="6" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <PasswordBox Grid.Column="0" x:Name="TxtPw" Background="Transparent" BorderThickness="0"
+                                     Foreground="#E2E8F0" FontSize="12" Padding="8,6" CaretBrush="#E2E8F0"
+                                     PasswordChanged="TxtPw_PasswordChanged"/>
+                        <TextBox Grid.Column="0" x:Name="TxtPwVisible" Background="Transparent" BorderThickness="0"
+                                 Foreground="#E2E8F0" FontSize="12" Padding="8,6" CaretBrush="#E2E8F0"
+                                 Visibility="Collapsed"
+                                 CommandManager.PreviewExecuted="BlockCopyPaste"/>
+                        <TextBlock Grid.Column="1" x:Name="BtnTogglePw" Text="👁" FontSize="14"
+                                   Foreground="#4A6585" VerticalAlignment="Center" Cursor="Hand"
+                                   Margin="0,0,8,0" MouseLeftButtonDown="TogglePassword_Click"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="권한" FontSize="11" Foreground="#94A3B8" Margin="0,0,0,4"/>
+                <Border Background="#0B1120" BorderBrush="#1E2D4A" BorderThickness="1" CornerRadius="6" Margin="0,0,0,20">
+                    <ComboBox x:Name="CmbRole" Background="Transparent" BorderThickness="0"
+                              Foreground="#E2E8F0" FontSize="12" Padding="6,6">
+                        <ComboBoxItem Content="Admin"/>
+                        <ComboBoxItem Content="Operator" IsSelected="True"/>
+                    </ComboBox>
+                </Border>
+
+                <Button x:Name="BtnSave" Content="저장" Height="38" FontSize="13"
+                        FontWeight="SemiBold" Foreground="White" BorderThickness="0"
+                        Cursor="Hand" Click="SaveUser_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#3B82F6" Offset="0"/>
+                            <GradientStop Color="#2563EB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Content="초기화" Height="32" FontSize="11" Margin="0,8,0,0"
+                        Foreground="#94A3B8" Background="#1E2D4A" BorderThickness="0"
+                        Cursor="Hand" Click="ClearForm_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <TextBlock x:Name="TxtFormError" FontSize="11" Foreground="#EF5350"
+                           Margin="0,10,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</mah:MetroWindow>

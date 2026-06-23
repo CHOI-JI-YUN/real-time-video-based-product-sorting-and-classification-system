@@ -1,0 +1,21 @@
+<Application x:Class="VisiPickHMI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MahApps.Metro 테마 -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- 직접 만든 색상 리소스 -->
+            <SolidColorBrush x:Key="PrimaryAccent" Color="#2563EB"/>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>
